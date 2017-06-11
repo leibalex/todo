@@ -1,0 +1,36 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background: #46E1DF;
+	border: 1px solid transparent;
+}
+
+body .container{
+	width: 600px;
+	min-height: 200px;
+	margin-top: 70px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border: 1px solid transparent;
+	border-radius: 15px;
+	background: #fff;
+	text-align: center;
+}
+
+body .container img{
+	margin-left: auto;
+	margin: auto;
+	margin-bottom: 50px;
+}
+
+ul li {
+	display: block;
+	font-size: 18px;
+	border-bottom: 3px solid black;
+	padding: 15px;
+	margin-bottom: 10px;
+}
