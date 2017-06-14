@@ -4,33 +4,94 @@
 }
 
 body{
-	background: #46E1DF;
-	border: 1px solid transparent;
+	background: #DBDBDB;
+	border: 0px solid transparent;
 }
 
-body .container{
-	width: 600px;
-	min-height: 200px;
-	margin-top: 70px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 20px;
-	border: 1px solid transparent;
-	border-radius: 15px;
-	background: #fff;
-	text-align: center;
-}
-
-body .container img{
-	margin-left: auto;
+.container{
+	width: 400px;
+	height: 200px;
 	margin: auto;
-	margin-bottom: 50px;
+	margin-top: 60px;
+	border: 1px solid black;
+	background: #fff;
 }
 
-ul li {
-	display: block;
-	font-size: 18px;
-	border-bottom: 3px solid black;
-	padding: 15px;
+.header{
+	background: #78DAFA;
+	height: 50px;
+}
+
+.header input[type = 'text']{
+	display: inline-block;
+	margin-top: 10px; 
+	margin-left: 10px;
 	margin-bottom: 10px;
+	outline: none;
+	padding: 5px;
+	width: 250px;
+}
+
+.header input[type = 'button']{
+	display: inline-block;
+	width: 50px;
+	height: 100%;
+	float: right;
+	border-radius: 0 0 10px 0;
+	background: #74FA97;
+	outline: none;
+	border: 0;
+	transition: background .2s ease-in-out;
+}
+
+.header input[type = 'button']:hover{
+	background: #00F706;
+}
+
+.todo{
+	border: 0px solid transparent;
+	padding: 10px;
+}
+
+li{
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px; 
+	height: 20px;
+
+}
+
+li .done{
+	border: 0;
+	background: #74FA97;
+	flex-grow: 1;
+	width: 10px;
+	height: 100%;
+	transition: width .2s ease-in-out, background .2s ease-in-out;
+}
+
+li .done:hover{
+	background: #00F706;
+	width: 50px;
+}
+
+li .cancell{
+	border: 0;
+	flex-grow: 1;
+	width: 10px;
+	height: 100%;
+	background: #F85B5B;
+	transition: width .2s ease-in-out, background .2s ease-in-out;
+}
+
+li .cancell:hover{
+	width: 50px;
+	background: #FF0000;
+}
+
+li span{
+	flex-grow: 50;
+	display: inline-block;
+	background: #DCDCDC;
+	padding-left: 5px
 }
