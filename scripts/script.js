@@ -31,10 +31,9 @@ window.onload = ()=>{
     function addActivity(){
     	let text = input.value;
 
-    	if(text){
+    	if(text) {
 
- 			let element = createDOMElement(text);
-    		addDOMElement(element, false);
+    		addListItem( createListItem(text) , false);
     		input.value = '';
 
     		data.todo.push(text);
@@ -45,12 +44,12 @@ window.onload = ()=>{
 
     }
 
-    	function remove(event){
+    	function remove() {
 
     		let value = this.parentNode,
     			parent = null;
 
-    		while(value.tagName !== 'LI'){
+    		while(value.tagName !== 'LI') {
     			value = value.parentNode;
     		}
 
@@ -60,17 +59,23 @@ window.onload = ()=>{
     		let text = value.firstElementChild.innerHTML,
     			index = -1;
 
-    			if(parent.id = 'todo'){
+    			console.log(text);
+
+    			if(parent.id == 'todo') {
     				index = data.todo.indexOf(text);
 
-    				if(index != -1){
+    				if(index != -1) {
     					data.todo.splice(index, 1);
+    					console.log('successfull remove from data.todo');
+
     				}
-    			}else{
+    			}
+    			if(parent.id == 'completed') {
     				index = data.complete.indexOf(text);
 
-    				if(index != -1){
+    				if(index != -1) {
     					data.complete.splice(index, 1);
+    					console.log('successfull remove from data.complete');
     				}
     			}
 
@@ -80,11 +85,11 @@ window.onload = ()=>{
 
     	}
 
-    	function complete(event){
+    	function complete() {
     		let li = this.parentNode,
     			parent = null;
 
-    		while(li.tagName !== 'LI'){
+    		while(li.tagName !== 'LI') {
     			li = li.parentNode;
     		}
 
@@ -93,8 +98,8 @@ window.onload = ()=>{
     		let text = li.firstElementChild.innerHTML,
     			index = -1;
 
-    		if(parent.id == 'todo'){
-    			addDOMElement(li, true);
+    		if(parent.id == 'todo') {
+    			addListItem(li, true);
     			index = data.todo.indexOf(text);
 
     			if(index != -1){
@@ -102,30 +107,30 @@ window.onload = ()=>{
     				data.complete.push(text);
     			}
 
-    		}else{
-    			addDOMElement(li, false);
+    		} else {
+    			addListItem(li, false);
     			index = data.complete.indexOf(text);
 
-    			if(index != -1){
+    			if(index != -1) {
     				data.complete.splice(index, 1);
     				data.todo.push(text);
     			}
     		}
 
-			dataObjectUpdate();    		
+			dataObjectUpdate();
     	}
 
-    	function addDOMElement(element, isComplete){
+    	function addListItem(item, isComplete) {
 
-    		if(!isComplete){
-    			ulTodo.insertBefore(element,ulTodo.firstElementChild);
-    		}else{
-    			ulComplete.insertBefore(element,ulComplete.firstElementChild);
+    		if(!isComplete) {
+    			ulTodo.insertBefore(item,ulTodo.firstElementChild);
+    		} else {
+    			ulComplete.insertBefore(item,ulComplete.firstElementChild);
     		}
 
     	}
 
-    	function createDOMElement(value){
+    	function createListItem(text) {
 
    	    let li = doc.createElement('li'),
     			span = doc.createElement('span'),
@@ -143,7 +148,7 @@ window.onload = ()=>{
     		btn2.innerHTML = svgComplete;
     		btn2.addEventListener('click',complete);
 
-    		span.innerHTML = value;
+    		span.innerHTML = text;
 
     		div.appendChild(btn1);
     		div.appendChild(btn2);
@@ -153,48 +158,53 @@ window.onload = ()=>{
     		return li;
     	}
 
-    	function dataObjectUpdate(){
+    	function dataObjectUpdate() {
     		localStorage.setItem('todolist', JSON.stringify(data));
     	}
 
-    	function renderTodoList(){
-    		console.log('start rendering');
+    	function renderTodoList() {
     		
-    		if(data.todo){
-    			console.log('todo isnt empty');
+    		if(data.todo.length != 0) {
+    			console.log('todo isn`t empty');
     			for(let i = 0; i < data.todo.length; i++){
-    				let domElement = createDOMElement(data.todo[i]);
-    				addDOMElement(domElement, false);
+    				let domElement = createListItem(data.todo[i]);
+    				addListItem(domElement, false);
     			}
-    		}else{
+    		} else {
     			console.log('todo is empty');
     		}
 
-    		if(data.complete){
-    			console.log('complete isnt empty');
+    		if(data.complete.length != 0) {
+    			console.log('complete isn`t empty');
     			for(let i = 0; i < data.complete.length; i++){
-    				let domElement = createDOMElement(data.complete[i]);
-    				addDOMElement(domElement,true);
+    				let domElement = createListItem(data.complete[i]);
+    				addListItem(domElement,true);
     			}
-    		}else{
+    		} else {
     			console.log('complete is empty');
     		}
 
     	}
 
     	/*  Test function  */
-    	function showStorage(){
-    		testData = JSON.parse(localStorage.getItem('todolist'));
+    	function showStorage() {
+    		let testData = JSON.parse(localStorage.getItem('todolist'));
+    		console.log('--------------------------\n');
 
-    		for(let i = 0; i< testData.todo.length; i++){
+    		console.log('\ntodo array\n');
+
+    		for(let i = 0; i < testData.todo.length; i++) {
     			console.log(testData.todo[i]);
     		}
 
-    		console.log('--------------------------\n\n');
+    		
 
-    		for(let i = 0; i< testData.complete.length; i++){
+    		console.log('\ncompleted array\n');
+
+    		for(let i = 0; i < testData.complete.length; i++){
     			console.log(testData.complete[i]);
     		}
+    		console.log('--------------------------\n');
     	}
 }
 
